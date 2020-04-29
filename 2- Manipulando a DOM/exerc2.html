@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Curso Javascript - Exercícios: Módulo 02</title>
+</head>
+
+<body>
+    <button onclick="criaQuadrado()">Cria Quadrado</button>
+    <div id="quadrados"></div>
+    <script>
+        function criaQuadrado() {
+            var quadradoElement = document.querySelector('#quadrados');
+
+            var novoQuadrado = document.createElement("div");
+            novoQuadrado.setAttribute('style', 'height: 100px; width: 100px; background-color: red; border-style: solid;border-color: white;');
+            novoQuadrado.setAttribute('onmouseover', 'mudaCor(this)');
+            quadradoElement.appendChild(novoQuadrado);
+        }
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function mudaCor(element) {
+            console.log(element.style.color);
+            element.style.backgroundColor = getRandomColor();
+        }
+    </script>
+</body>
+
+</html>

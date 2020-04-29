@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Curso Javascript - Exercícios: Módulo 02</title>
+</head>
+
+<body>
+    <input type="text" name="nome">
+    <button onClick="adicionar()">Adicionar</button>
+    <div id="lista"></div>
+    <script>
+        var nomes = ["Diego", "Gabriel", "Lucas"];
+        var listaElement = document.querySelector('#lista');
+        var novoElement = document.createElement('ul');
+
+        for (var nome in nomes) {
+            var novoNo = document.createElement('li');
+            var texto = document.createTextNode(nomes[nome]);
+
+            novoNo.appendChild(texto);
+            novoElement.appendChild(novoNo);
+            listaElement.appendChild(novoElement);
+        }
+
+        function adicionar() {
+            var element = document.querySelector('#lista ul');
+            var input = document.querySelector('input[name=nome]');
+
+            var novoNo = document.createElement('li');
+            var texto = document.createTextNode(input.value);
+            novoNo.appendChild(texto);
+            element.appendChild(novoNo);
+            input.value = "";
+        }
+    </script>
+</body>
+
+</html>

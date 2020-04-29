@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Curso Javascript</title>
+</head>
+
+<body>
+
+    <input type="text" name="user">
+    <button onclick="getRepositorios()">Adicionar</button>
+    <div id="lista"></div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        function montaLista(repositorios) {
+            var listaElement = document.querySelector('#lista');
+
+            listaElement.innerHTML = '';
+
+            var ulElement = document.createElement('ul');
+
+            for(repo of repositorios) {
+                var liElement = document.createElement('li');
+                var liText = document.createTextNode(repo.name);
+
+                liElement.appendChild(liText);
+                ulElement.appendChild(liElement);
+            }
+            listaElement.appendChild(ulElement);
+        }
+
+        function getRepositorios() {
+            var user = document.querySelector('input[name=user]');
+
+            // pega info usuário
+            axios.get('https://api.github.com/users/' + user.value)
+                .then(function (response) {
+
+                    //pega os repositórios
+                    axios.get(response.data.repos_url)
+                        .then(function (response) {
+                            montaLista(response.data);
+                        })
+                        .catch(function (error) {
+                            console.warn(error);
+                        });
+                })
+                .catch(function (error) {
+                    console.warn(error);
+                });
+        }
+    </script>
+</body>
+
+</html>
